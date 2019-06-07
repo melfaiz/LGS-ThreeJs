@@ -2,6 +2,8 @@ let scene, camera, renderer, mesh, sphere;
 
 function init(){
 
+    window.alert("Use the mouse and keyboard to control the object");
+
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000)
@@ -13,6 +15,7 @@ function init(){
 
     document.body.appendChild(renderer.domElement);
 
+   
 
 
 
