@@ -1,4 +1,4 @@
-let scene, camera, renderer, mesh;
+let scene, camera, renderer, mesh, sphere;
 
 function init(){
 
@@ -16,13 +16,37 @@ function init(){
 
 
 
+    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+    const texture = new THREE.TextureLoader().load('textures/flower.jpg');
+    var material = new THREE.MeshBasicMaterial( { map: texture } );
+    mesh = new THREE.Mesh( geometry, material );
+    
+    mesh.rotation.x += 0.5;
+    mesh.rotation.y += 0.5;   
+    scene.add(mesh);
+
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+
+
+
+    camera.position.z = 5;
+
+
+
+
+
+
+
+
 }
 
-
-
 var animate = function () {
+ 
     requestAnimationFrame( animate );
     renderer.render( scene, camera );
+
 };
 
 function onWindowResize() {
