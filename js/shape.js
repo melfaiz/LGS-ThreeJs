@@ -1,0 +1,39 @@
+let scene, camera, renderer, mesh;
+
+function init(){
+
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000)
+    camera.position.z = 5;
+    
+    renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer.setClearColor("#e5e5e5");
+    renderer.setSize(window.innerWidth,window.innerHeight);
+
+    document.body.appendChild(renderer.domElement);
+
+
+
+
+}
+
+
+
+var animate = function () {
+    requestAnimationFrame( animate );
+    renderer.render( scene, camera );
+};
+
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight ;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+   
+}
+
+window.addEventListener('resize', onWindowResize, false);
+
+init();
+animate();
