@@ -1,4 +1,4 @@
-let scene, camera, renderer, mesh, sphere;
+let scene, camera, renderer, object, light;
 
 function init(){
 
@@ -15,29 +15,58 @@ function init(){
 
     document.body.appendChild(renderer.domElement);
 
-   
+    light = new THREE.AmbientLight( 0xffffff ); // soft white light
+    scene.add( light );
 
 
+    // Instantiate a loader
+    var loader = new THREE.GLTFLoader();
 
-    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-
-    const texture = new THREE.TextureLoader().load('textures/flower.jpg');
-    var material = new THREE.MeshBasicMaterial( { map: texture } );
-    mesh = new THREE.Mesh( geometry, material );
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/board.gltf',
+        gltfload,
+        loading,
+        error
+    );
     
-    mesh.rotation.x += 0.5;
-    mesh.rotation.y += 0.5;   
-    scene.add(mesh);
+    
+    // called when the resource is loaded
+    function gltfload( gltf ) {
+        
+        object = gltf.scene;
+        scene.add( object );
+        object.rotation.z = Math.PI / 3;
+        object.rotation.y = - Math.PI / 6;
+        object.rotation.x = 0;
 
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+        gltf.animations; // Array<THREE.AnimationClip>
+        gltf.scene; // THREE.Scene
+        gltf.scenes; // Array<THREE.Scene>
+        gltf.cameras; // Array<THREE.Camera>
+        gltf.asset; // Object
+
+    }
+
+    // called while loading is progressing
+    function loading ( xhr ) {
+
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+    }
+    // called when loading has errors
+    function error ( error ) {
+        console.log( 'An error happened' );
+    }
 
 
 
-
+    controls = new THREE.OrbitControls(camera);
     camera.position.z = 5;
 
-
-
+    
 
 
 
@@ -46,7 +75,7 @@ function init(){
 }
 
 var animate = function () {
- 
+
     requestAnimationFrame( animate );
     renderer.render( scene, camera );
 
