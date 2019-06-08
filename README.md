@@ -12,3 +12,5 @@ Google Chrome 9+, Firefox 4+, Opera 15+, Safari 5.1+, Internet Explorer 11 and M
 
 ### Note: 
 If you don't need to support these old browsers, then it is not recommended to use the other renderers as they are slower and support less features than the WebGLRenderer.
+
+![Preview](https://github.com/melfaiz/LGS_ThreeJS/blob/master/images/image1.PNG)
