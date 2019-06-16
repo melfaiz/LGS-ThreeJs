@@ -49,7 +49,9 @@ function init(){
 
     
     controls = new THREE.OrbitControls(camera);
+    controls.minDistance=2;
     camera.position.z = 5;
+    controls.maxDistance=8;
 
     load(file);
 }
